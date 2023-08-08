@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
+import { SwPush } from '@angular/service-worker';
 import { ToastrService } from 'ngx-toastr';
-
 
 @Component({
   selector: 'app-root',
@@ -9,17 +9,29 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AppComponent {
   title = 'explenderAppv2';
+  public readonly VAPID_PUBLIC_KEY = "BJDOJtzWNAaK801fAXKcMbL1-xp1QPDYRpSuzS-TPKvyCyxc2tLUoFNoQiG_umb4xw0YFd40VTdjjENpJPKl460";
 
+  constructor(private swPush: SwPush) {
+    this.subscribeToNotifications();
+  }
 
-
-  constructor(private toastr: ToastrService) {}
-
-  showSuccess() {
-    this.toastr.success('Hello world!', 'Toastr fun!');
+  subscribeToNotifications(): void {
+    this.swPush.requestSubscription({
+      serverPublicKey: this.VAPID_PUBLIC_KEY
+    }).then(sub => {
+      const token = JSON.stringify(sub);
+      console.log('---------------- bien leído', token);
+    }).catch(err => {
+      console.error('Error al suscribirse a las notificaciones: culpa tuya leio', err);
+    });
   }
 }
 
 
+
+// showSuccess() {
+//   this.toastr.success('Hello world!', 'Toastr fun!');
+// }
 
 
 // =======================================
