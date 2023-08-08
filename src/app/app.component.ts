@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
 import { ToastrService } from 'ngx-toastr';
+import { ApiRestService } from './service/api-rest.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent {
   title = 'explenderAppv2';
   public readonly VAPID_PUBLIC_KEY = "BJDOJtzWNAaK801fAXKcMbL1-xp1QPDYRpSuzS-TPKvyCyxc2tLUoFNoQiG_umb4xw0YFd40VTdjjENpJPKl460";
 
-  constructor(private swPush: SwPush) {
+  constructor(private swPush: SwPush,private apiRest:ApiRestService) {
     this.subscribeToNotifications();
   }
 
@@ -21,6 +22,15 @@ export class AppComponent {
     }).then(sub => {
       const token = JSON.stringify(sub);
       console.log('---------------- bien leído', token);
+
+
+      //Aca tiene que estar el servicio
+      console.log('abajo mio comienza el servicio del back')
+      this.apiRest.saveToken(token).subscribe((res:string)=>{
+        console.log(res);
+      })
+
+
     }).catch(err => {
       console.error('Error al suscribirse a las notificaciones: culpa tuya leio', err);
     });
