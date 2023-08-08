@@ -25,10 +25,12 @@ export class AppComponent {
 
 
       //Aca tiene que estar el servicio
-      console.log('abajo mio comienza el servicio del back')
-      this.apiRest.saveToken(token).subscribe((res:string)=>{
-        console.log(res);
-      })
+
+
+      // console.log('abajo mio comienza el servicio del back')
+      // this.apiRest.saveToken(token).subscribe((res:string)=>{
+      //   console.log(res);
+      // })
 
 
     }).catch(err => {
