@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class ApiRestService {
 
-  public url = 'http://localhost:4040'; // Cambia la URL según tu configuración
+  // public url = 'http://localhost:4040'; // Cambia la URL según tu configuración
+  public url = 'http://explender.sytes.net:4040'; // Cambia la URL según tu configuración
 
   constructor(private http: HttpClient) { }
 
