@@ -3,8 +3,6 @@ import { SwPush } from '@angular/service-worker';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRestService } from './api-rest.service';
 
-
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,7 +13,7 @@ export class AppComponent {
   public readonly VAPID_PUBLIC_KEY = "BJDOJtzWNAaK801fAXKcMbL1-xp1QPDYRpSuzS-TPKvyCyxc2tLUoFNoQiG_umb4xw0YFd40VTdjjENpJPKl460";
 
   constructor(private swPush: SwPush,private apiRest:ApiRestService) {
-    this.subscribeToNotifications();
+    // this.subscribeToNotifications();
   }
 
   subscribeToNotifications(): void {
@@ -39,6 +37,19 @@ export class AppComponent {
       console.error('Error al suscribirse a las notificaciones: culpa tuya leio', err);
     });
   }
+
+  sendNotification(): void {
+    console.log('soy un send notification');
+    this.apiRest.sendToken().subscribe(
+      (response: any) => {
+        console.log('Notification sent successfully:', response);
+      },
+      (error: any) => {
+        console.error('Error sending notification:', error);
+      }
+    );
+  }
+
 }
 
 

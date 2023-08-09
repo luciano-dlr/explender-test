@@ -16,4 +16,11 @@ export class ApiRestService {
       token
     })
   }
+
+  sendToken(): Observable<any> {
+    console.log('entra token');
+    return this.http.post(`${this.url}/send`, {});
+  }
+
+
 }
