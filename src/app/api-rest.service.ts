@@ -15,9 +15,11 @@ export class ApiRestService {
   constructor(private http: HttpClient) { }
 
   saveToken = (token:any) => {
+    console.log('soy tu token guardado',token)
     return this.http.post(`${this.url}/save`,{
       token
     })
+
   }
 
   sendToken(): Observable<any> {
